@@ -72,7 +72,7 @@ function handleKeyPress(key) {
         return;
     }
 
-    if (key === "Töröl") {
+    if (key === "⌫") {
         if (currentCol > 0) {
             currentCol--;
             boardState[currentRow][currentCol] = "";
@@ -95,7 +95,7 @@ document.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
         handleKeyPress("Enter");
     } else if (e.key === "Backspace") {
-        handleKeyPress("Töröl");
+        handleKeyPress("⌫");
     } else {
         const letter = e.key.toUpperCase();
         if (/^[A-ZÁÉÍÓÖŐÚÜŰ]$/.test(letter)) {
