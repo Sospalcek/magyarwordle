@@ -10,10 +10,39 @@
 </head>
 <body>
 
+<!-- Help Button in the top right -->
+<button id="help-btn" class="icon-btn">?</button>
+
+<!-- Tutorial Modal Overlay -->
+<div id="help-modal" class="modal">
+    <div class="modal-content">
+        <span id="close-modal" class="close">&times;</span>
+        <h2>Hogyan kell játszani?</h2>
+        <p>Találd ki a szót 6 próbálkozásból!</p>
+        <hr style="border: 0.5px solid #444; margin: 15px 0;">
+        <p>• Minden tippnek egy érvényes 5 betűs magyar szónak kell lennie.</p>
+        <p>• A szavaknak csak szótári alakja elfogadható!</p>
+        <p>• A betűk színe megváltozik, hogy mutassa, milyen közel voltál:</p>
+
+        <div style="display: flex; align-items: center; gap: 10px; margin: 10px 0;">
+            <div class="tile correct" style="width: 30px; height: 30px; font-size: 14px; display: flex; align-items: center; justify-content: center;">A</div>
+            <span>A betű a szóban van és a jó helyen.</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px; margin: 10px 0;">
+            <div class="tile present" style="width: 30px; height: 30px; font-size: 14px; display: flex; align-items: center; justify-content: center;">A</div>
+            <span>A betű a szóban van, de másik helyen.</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px; margin: 10px 0;">
+            <div class="tile absent" style="width: 30px; height: 30px; font-size: 14px; display: flex; align-items: center; justify-content: center;">A</div>
+            <span>A betű nincs benne a szóban.</span>
+        </div>
+    </div>
+</div>
+
 
 <div class="credits">
     Készítette: Sospalcek<br>
-    <span class="version">v1.0</span>
+    <span class="version">v1.1.0</span>
 </div>
 
 <div class="fast_message">

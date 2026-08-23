@@ -280,5 +280,24 @@ setTimeout(()=> {
     }
 }
 
+const helpBtn = document.getElementById("help-btn");
+const helpModal = document.getElementById("help-modal");
+const closeModal = document.getElementById("close-modal");
+
+helpBtn.addEventListener("click", () => {
+    helpModal.style.display = "flex";
+    helpBtn.blur();
+});
+
+closeModal.addEventListener("click", () => {
+    helpModal.style.display = "none";
+});
+
+window.addEventListener("click", (e) => {
+    if (e.target === helpModal) {
+        helpModal.style.display = "none";
+    }
+});
+
 //Test:
 console.log(targetWords)
