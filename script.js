@@ -232,7 +232,7 @@ function checkGuess() {
             tile.classList.add(rowColorStates[i]);
         }, i * 200);
     }
-
+setTimeout(()=> {
     guessChars.forEach((char, i) => {
         const originalChar = currentGuess[i].toUpperCase();
         const currentState = rowColorStates[i];
@@ -243,11 +243,12 @@ function checkGuess() {
                 keyEl.className = "key correct";
             } else if (currentState === "present" && !keyEl.classList.contains("correct")) {
                 keyEl.className = "key present";
-            } else if (currentState === "absent" && !keyEl.classList.contains("correct" ) && !keyEl.classList.contains("present")) {
+            } else if (currentState === "absent" && !keyEl.classList.contains("correct") && !keyEl.classList.contains("present")) {
                 keyEl.className = "key absent";
             }
         }
     });
+}, COLS*200);
 
 
     if (isWin) {
