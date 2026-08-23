@@ -246,3 +246,19 @@ h1 {
     //box-shadow: 0 0 8px rgb(89 89 92); /
 }
 
+.fast_message{
+    position: fixed;
+    bottom: 20px;
+    right: 40px;
+    color: #818384;
+    font-size: 0.85rem;
+    font-family: Arial, sans-serif;
+    line-height: 1.4;
+    text-align: left;
+    user-select: none;
+    opacity: 0;
+    animation: credit 0.5s ease forwards;
+    animation-delay: 2s;
+
+}
+
