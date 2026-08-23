@@ -123,6 +123,7 @@ h1 {
 
 .key {
     background-color: #666a6c;
+    background-size: 100px;
     color: white;
     font-weight: bold;
     font-size: 1rem;
@@ -138,7 +139,7 @@ h1 {
 }
 
 .key:hover {
-    background-color: #c6cdd5;
+    background-color: #b0b0b3;
 }
 
 
@@ -374,9 +375,9 @@ h1 {
 
 
     .key {
-        padding: 10px 4px;
-        font-size: 0.85rem;
-        min-width: 24px;
+        padding: 10px 2px;
+        font-size: 0.60rem;
+        min-width: 23px;
     }
 
 

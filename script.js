@@ -30,9 +30,9 @@ for (let r = 0; r < ROWS; r++) {
 updateTileDisplay();
 
 const keyboardRows = [
-    ["Q", "W", "E", "R", "T", "Z", "U", "I", "O", "P", "Ő", "Ú"],
-    ["A", "S", "D", "F", "G", "H", "J", "K", "L", "É", "Á", "Ű"],
-    ["Enter", "Y", "X", "C", "V", "B", "N", "M", "Ö", "Ü", "Töröl"]
+    ["Q", "W", "E", "R", "T", "Z", "U", "I", "O", "P", "Ő","Ó"],
+    ["A", "S", "D", "F", "G", "H", "J", "K", "L", "É", "Á","Ú", "Ű"],
+    ["Enter","Í", "Y", "X", "C", "V", "B", "N", "M", "Ö", "Ü", "⌫"]
 ];
 
 const keyboardContainer = document.getElementById("keyboard-container");
