@@ -1,7 +1,5 @@
 ﻿import { rawDictionary, validWords } from './words.js';
 
-
-
 const targetWords = rawDictionary;
 
 const ROWS = 6;
@@ -49,11 +47,6 @@ keyboardRows.forEach(row => {
         const button = document.createElement("button");
         button.classList.add("key");
         button.textContent = char;
-
-        if (char === "Enter" || char === "Töröl") {
-            //button.style.fontSize = "0.8rem";
-            //button.style.padding = "14px 8px";
-        }
 
         button.addEventListener("click", () => handleKeyPress(char));
 
@@ -115,9 +108,7 @@ restartBtn.addEventListener("click", () => {
     if (isRestarting) return;
     isRestarting = true;
 
-
     restartBtn.blur();
-
 
     for (let r = 0; r < ROWS; r++) {
         for (let c = 0; c < COLS; c++) {
@@ -126,12 +117,10 @@ restartBtn.addEventListener("click", () => {
         }
     }
 
-
     setTimeout(() => {
         currentRow = 0;
         currentCol = 0;
         gameOver = false;
-
 
         let newWord;
         do {
@@ -147,7 +136,6 @@ restartBtn.addEventListener("click", () => {
                 tile.textContent = "";
                 tile.className = "tile";
 
-                // Re-trigger the entrance animation
                 tile.style.animation = "none";
                 tile.offsetHeight;
                 const totalIndex = (r * COLS) + c;
@@ -163,7 +151,6 @@ restartBtn.addEventListener("click", () => {
         isRestarting = false;
         updateTileDisplay();
     }, 1000);
-
 });
 
 function updateTileDisplay() {
@@ -171,7 +158,6 @@ function updateTileDisplay() {
         for (let c = 0; c < COLS; c++) {
             const tile = document.getElementById(`tile-${r}-${c}`);
             tile.textContent = boardState[r][c];
-
 
             if (!gameOver && r === currentRow && c === currentCol) {
                 tile.classList.add("active-tile");
@@ -199,10 +185,11 @@ function checkGuess() {
         return;
     }
 
-    const targetChars = targetWord.split("");
+    const targetChars = targetWord.toLowerCase().split("");
     const guessChars = currentGuess.split("");
     const rowColorStates = Array(COLS).fill("absent");
 
+    // Pass 1: Check for exact matches (Green)
     for (let i = 0; i < COLS; i++) {
         if (guessChars[i] === targetChars[i]) {
             rowColorStates[i] = "correct";
@@ -211,6 +198,7 @@ function checkGuess() {
         }
     }
 
+    // Pass 2: Check for present/absent matches (Yellow/Gray)
     for (let i = 0; i < COLS; i++) {
         if (guessChars[i] === null) continue;
 
@@ -223,49 +211,50 @@ function checkGuess() {
         }
     }
 
+    const isWin = (currentGuess === targetWord.toLowerCase());
 
-    const isWin = (currentGuess === targetWord);
-
+    // Animate tiles
     for (let i = 0; i < COLS; i++) {
         const tile = document.getElementById(`tile-${currentRow}-${i}`);
         setTimeout(() => {
             tile.classList.add(rowColorStates[i]);
         }, i * 200);
     }
-setTimeout(()=> {
-    guessChars.forEach((char, i) => {
-        const originalChar = currentGuess[i].toUpperCase();
-        const currentState = rowColorStates[i];
-        const keyEl = keyElements[originalChar];
 
-        if (keyEl) {
-            if (currentState === "correct") {
-                keyEl.className = "key correct";
-            } else if (currentState === "present" && !keyEl.classList.contains("correct")) {
-                keyEl.className = "key present";
-            } else if (currentState === "absent" && !keyEl.classList.contains("correct") && !keyEl.classList.contains("present")) {
-                keyEl.className = "key absent";
+    // Update keyboard using currentGuess
+    setTimeout(() => {
+        for (let i = 0; i < COLS; i++) {
+            const originalChar = currentGuess[i].toUpperCase();
+            const currentState = rowColorStates[i];
+            const keyEl = keyElements[originalChar];
+
+            if (keyEl) {
+                if (currentState === "correct") {
+                    keyEl.className = "key correct";
+                } else if (currentState === "present" && !keyEl.classList.contains("correct")) {
+                    keyEl.className = "key present";
+                } else if (currentState === "absent" && !keyEl.classList.contains("correct") && !keyEl.classList.contains("present")) {
+                    keyEl.className = "key absent";
+                }
             }
         }
-    });
-}, COLS*200);
-
+    }, COLS * 200);
 
     if (isWin) {
         setTimeout(() => {
             showMessage("Gratulálok! Kitaláltad a szót!");
 
-
-            confetti({
-                particleCount: 50,
-                spread: 70,
-                origin: { y: 0.6 }
-            });
+            if (typeof confetti === "function") {
+                confetti({
+                    particleCount: 80,
+                    spread: 70,
+                    origin: { y: 0.6 }
+                });
+            }
         }, COLS * 200);
         gameOver = true;
         return;
     }
-
 
     currentRow++;
     currentCol = 0;
@@ -298,6 +287,3 @@ window.addEventListener("click", (e) => {
         helpModal.style.display = "none";
     }
 });
-
-//Test:
-console.log(targetWords)
