@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magyar Wordle</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+<div class="credits">
+    Készítette: Sospalcek<br>
+    <span class="version">v1.0</span>
+</div>
+
+<div id="game-container">
+
+
+    <img src="logo.png" alt="Magyar Wordle Logo" class="site-logo">
+
+    <h1>MAGYAR WORDLE</h1>
+
+    <!-- The Letter Grid -->
+    <div id="board"></div>
+
+    <!-- Message Toast -->
+    <div id="message"></div>
+
+    <div id="keyboard-container"></div>
+
+    <button id="restart-btn">Újra</button>
+</div>
+
+<script type="module" src="script.js"></script>
+</body>
+</html>
