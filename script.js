@@ -48,6 +48,9 @@ keyboardRows.forEach(row => {
         button.classList.add("key");
         button.textContent = char;
 
+        if (char === "Enter" || char === "⌫") {
+            button.classList.add("wide-key");}
+
         button.addEventListener("click", () => handleKeyPress(char));
 
         rowDiv.appendChild(button);
@@ -189,7 +192,7 @@ function checkGuess() {
     const guessChars = currentGuess.split("");
     const rowColorStates = Array(COLS).fill("absent");
 
-    // Pass 1: Check for exact matches (Green)
+
     for (let i = 0; i < COLS; i++) {
         if (guessChars[i] === targetChars[i]) {
             rowColorStates[i] = "correct";
@@ -198,7 +201,7 @@ function checkGuess() {
         }
     }
 
-    // Pass 2: Check for present/absent matches (Yellow/Gray)
+
     for (let i = 0; i < COLS; i++) {
         if (guessChars[i] === null) continue;
 
@@ -221,7 +224,7 @@ function checkGuess() {
         }, i * 200);
     }
 
-    // Update keyboard using currentGuess
+
     setTimeout(() => {
         for (let i = 0; i < COLS; i++) {
             const originalChar = currentGuess[i].toUpperCase();

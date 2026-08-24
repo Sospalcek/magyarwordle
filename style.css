@@ -125,6 +125,8 @@ h1 {
     background-color: #666a6c;
     background-size: 100px;
     color: white;
+    width: 35px;
+    height: 45px;
     font-weight: bold;
     font-size: 1rem;
     padding: 14px 12px;
@@ -136,6 +138,11 @@ h1 {
     align-items: center;
     text-transform: uppercase;
     transition: background-color 0.5s;
+}
+
+.wide-key{
+    width: 70px;
+    font-size: 1rem;
 }
 
 .key:hover {
