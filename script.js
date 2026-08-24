@@ -147,7 +147,12 @@ restartBtn.addEventListener("click", () => {
         }
 
         Object.values(keyElements).forEach(keyEl => {
-            keyEl.className = "key";
+
+            if (keyEl.textContent === "Enter" || keyEl.textContent === "⌫") {
+                keyEl.className = "key wide-key";
+            } else {
+                keyEl.className = "key";
+            }
         });
 
         showMessage("");
