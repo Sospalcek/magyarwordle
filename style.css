@@ -257,7 +257,7 @@ h1 {
 .fast_message{
     position: fixed;
     bottom: 20px;
-    right: 40px;
+    right: 20px;
     color: #818384;
     font-size: 0.85rem;
     font-family: Arial, sans-serif;
@@ -380,40 +380,50 @@ h1 {
         font-size: 1.5rem;
     }
 
+    .keyboard-row {
+        display: flex;
+        gap: 5px;
+    }
 
     .key {
         padding: 10px 2px;
-        font-size: 0.60rem;
-        min-width: 23px;
+        font-size: 0.75rem;
+        height: 34px;
+        width: 23px;
     }
 
-
-    #help-btn {
-        position: fixed;
-        top: 10px;
-        right: 10px;
-        width: 35px;
-        height: 35px;
-        font-size: 1rem;
+    .wide-key {
+        width: 45px;
+        font-size: 0.75rem;
     }
 
-    .modal-content {
-        width: 95%;
-        padding: 16px;
+        #help-btn {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            width: 35px;
+            height: 35px;
+            font-size: 1rem;
+        }
+
+        .modal-content {
+            width: 95%;
+            padding: 16px;
+        }
+
+        .credits {
+            font-size: 0.5rem;
+        }
+
+        .fast_message {
+            position: fixed;
+            top: 10px;
+            right: 130px;
+            font-size: 0.5rem;
+            animation: appear 0.5s ease 2s forwards;
+        }
+
     }
 
-    .credits{
-        font-size: 0.5rem;
-    }
-
-    .fast_message{
-        position: fixed;
-        top: 10px;
-        right: 130px;
-        font-size: 0.5rem;
-        animation: appear 0.5s ease 2s forwards;
-    }
-
-}
 
 
