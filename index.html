@@ -11,10 +11,8 @@
 </head>
 <body>
 
-<!-- Help Button in the top right -->
 <button id="help-btn" class="icon-btn">?</button>
 
-<!-- Tutorial Modal Overlay -->
 <div id="help-modal" class="modal">
     <div class="modal-content">
         <span id="close-modal" class="close">&times;</span>
@@ -41,9 +39,57 @@
 </div>
 
 
+<button id="stats-btn" title="Statisztika">
+    <img src="stats_icon.png" alt="Statisztika" class="custom-stat-icon">
+</button>
+
+
+<div id="stats-modal" class="modal">
+    <div class="modal-content">
+        <span class="close" id="close-stats">&times;</span>
+        <h2 style="margin-top: 0; text-align: center;">Statisztika</h2>
+        <div style="display: flex; justify-content: space-around; text-align: center; margin: 20px 0;">
+            <div>
+                <div id="stat-games" style="font-size: 2rem; font-weight: bold;">0</div>
+                <div style="font-size: 0.8rem; color: #818384;">Játék</div>
+            </div>
+            <div>
+                <div id="stat-winrate" style="font-size: 2rem; font-weight: bold;">0%</div>
+                <div style="font-size: 0.8rem; color: #818384;">Győzelem %</div>
+            </div>
+            <div>
+                <div id="stat-wins" style="font-size: 2rem; font-weight: bold;">0</div>
+                <div style="font-size: 0.8rem; color: #818384;">Győzelem</div>
+            </div>
+        </div>
+        <h3 style="font-size: 1rem; margin-bottom: 10px;">Eloszlás (Tippek száma)</h3>
+        <div id="guess-distribution" style="display: flex; flex-direction: column; gap: 4px;">
+            <!-- Rows for 1 to 6 tries will be injected or styled here -->
+            <div class="dist-row" style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem;">
+                <span>1:</span> <div class="bar-container" style="flex: 1; background: #3a3a3c; border-radius: 4px; overflow: hidden;"><div id="bar-1" class="dist-bar" style="width: 0%; background: #51ca45; color: white; padding: 2px 6px; text-align: right; font-weight: bold;">0</div></div>
+            </div>
+            <div class="dist-row" style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem;">
+                <span>2:</span> <div class="bar-container" style="flex: 1; background: #3a3a3c; border-radius: 4px; overflow: hidden;"><div id="bar-2" class="dist-bar" style="width: 0%; background: #51ca45; color: white; padding: 2px 6px; text-align: right; font-weight: bold;">0</div></div>
+            </div>
+            <div class="dist-row" style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem;">
+                <span>3:</span> <div class="bar-container" style="flex: 1; background: #3a3a3c; border-radius: 4px; overflow: hidden;"><div id="bar-3" class="dist-bar" style="width: 0%; background: #51ca45; color: white; padding: 2px 6px; text-align: right; font-weight: bold;">0</div></div>
+            </div>
+            <div class="dist-row" style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem;">
+                <span>4:</span> <div class="bar-container" style="flex: 1; background: #3a3a3c; border-radius: 4px; overflow: hidden;"><div id="bar-4" class="dist-bar" style="width: 0%; background: #51ca45; color: white; padding: 2px 6px; text-align: right; font-weight: bold;">0</div></div>
+            </div>
+            <div class="dist-row" style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem;">
+                <span>5:</span> <div class="bar-container" style="flex: 1; background: #3a3a3c; border-radius: 4px; overflow: hidden;"><div id="bar-5" class="dist-bar" style="width: 0%; background: #51ca45; color: white; padding: 2px 6px; text-align: right; font-weight: bold;">0</div></div>
+            </div>
+            <div class="dist-row" style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem;">
+                <span>6:</span> <div class="bar-container" style="flex: 1; background: #3a3a3c; border-radius: 4px; overflow: hidden;"><div id="bar-6" class="dist-bar" style="width: 0%; background: #51ca45; color: white; padding: 2px 6px; text-align: right; font-weight: bold;">0</div></div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="credits">
     Készítette: Sospalcek<br>
-    <span class="version">v1.2.1</span>
+    <span class="version">v1.3</span>
 </div>
 
 <div class="fast_message">
@@ -57,10 +103,8 @@
 
     <h1>MAGYAR WORDLE</h1>
 
-    <!-- The Letter Grid -->
     <div id="board"></div>
 
-    <!-- Message Toast -->
     <div id="message"></div>
 
     <div id="keyboard-container"></div>

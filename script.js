@@ -10,7 +10,7 @@ let gameOver = false;
 let isRestarting = false;
 
 let targetWord = targetWords[Math.floor(Math.random() * targetWords.length)];
-console.log("Secret target word (for testing):", targetWord);
+console.log("target word:", targetWord);
 
 const boardState = Array(ROWS).fill().map(() => Array(COLS).fill(""));
 
@@ -49,7 +49,8 @@ keyboardRows.forEach(row => {
         button.textContent = char;
 
         if (char === "Enter" || char === "⌫") {
-            button.classList.add("wide-key");}
+            button.classList.add("wide-key");
+        }
 
         button.addEventListener("click", () => handleKeyPress(char));
 
@@ -147,7 +148,6 @@ restartBtn.addEventListener("click", () => {
         }
 
         Object.values(keyElements).forEach(keyEl => {
-
             if (keyEl.textContent === "Enter" || keyEl.textContent === "⌫") {
                 keyEl.className = "key wide-key";
             } else {
@@ -197,7 +197,6 @@ function checkGuess() {
     const guessChars = currentGuess.split("");
     const rowColorStates = Array(COLS).fill("absent");
 
-
     for (let i = 0; i < COLS; i++) {
         if (guessChars[i] === targetChars[i]) {
             rowColorStates[i] = "correct";
@@ -205,7 +204,6 @@ function checkGuess() {
             guessChars[i] = null;
         }
     }
-
 
     for (let i = 0; i < COLS; i++) {
         if (guessChars[i] === null) continue;
@@ -220,10 +218,11 @@ function checkGuess() {
     }
 
     const isWin = (currentGuess === targetWord.toLowerCase());
+    const guessedRow = currentRow;
 
-    // Animate tiles
+
     for (let i = 0; i < COLS; i++) {
-        const tile = document.getElementById(`tile-${currentRow}-${i}`);
+        const tile = document.getElementById(`tile-${guessedRow}-${i}`);
         setTimeout(() => {
             tile.classList.add(rowColorStates[i]);
         }, i * 200);
@@ -248,7 +247,10 @@ function checkGuess() {
         }
     }, COLS * 200);
 
+
     if (isWin) {
+        recordWin(guessedRow);
+
         setTimeout(() => {
             showMessage("Gratulálok! Kitaláltad a szót!");
 
@@ -259,20 +261,39 @@ function checkGuess() {
                     origin: { y: 0.6 }
                 });
             }
+
+            // Pop up the stats modal 2 seconds AFTER the confetti/message appears
+            setTimeout(() => {
+                updateStatsDisplay();
+                statsModal.style.display = "flex";
+            }, 3000);
+
         }, COLS * 200);
+
         gameOver = true;
         return;
     }
 
+
     currentRow++;
     currentCol = 0;
-
     updateTileDisplay();
 
+
     if (currentRow >= ROWS) {
+        recordLoss();
+
         setTimeout(() => {
             showMessage(`Kifogytál próbálkozásokból! A szó: <span style="color: white; font-weight: bold;">${targetWord.toUpperCase()}</span> volt!`);
+
+            // Pop up the stats modal 2 seconds AFTER the loss message appears
+            setTimeout(() => {
+                updateStatsDisplay();
+                statsModal.style.display = "flex";
+            }, 30008);
+
         }, COLS * 200);
+
         gameOver = true;
     }
 }
@@ -293,5 +314,64 @@ closeModal.addEventListener("click", () => {
 window.addEventListener("click", (e) => {
     if (e.target === helpModal) {
         helpModal.style.display = "none";
+    }
+});
+
+let stats = JSON.parse(localStorage.getItem("wordle_stats")) || {
+    gamesPlayed: 0,
+    wins: 0,
+    guesses: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 }
+};
+
+function saveStats() {
+    localStorage.setItem("wordle_stats", JSON.stringify(stats));
+}
+
+function updateStatsDisplay() {
+    document.getElementById("stat-games").textContent = stats.gamesPlayed;
+    const winRate = stats.gamesPlayed > 0 ? Math.round((stats.wins / stats.gamesPlayed) * 100) : 0;
+    document.getElementById("stat-winrate").textContent = winRate + "%";
+    document.getElementById("stat-wins").textContent = stats.wins;
+
+    const maxVal = Math.max(...Object.values(stats.guesses), 1);
+
+    for (let i = 1; i <= 6; i++) {
+        const count = stats.guesses[i];
+        const bar = document.getElementById(`bar-${i}`);
+        bar.textContent = count > 0 ? count : "‎";
+        const percentage = Math.max((count / maxVal) * 100, count > 0 ? 8 : 0);
+        bar.style.width = percentage + "%";
+    }
+}
+
+function recordWin(rowNum) {
+    stats.gamesPlayed++;
+    stats.wins++;
+    stats.guesses[rowNum + 1]++;
+    saveStats();
+}
+
+function recordLoss() {
+    stats.gamesPlayed++;
+    saveStats();
+}
+
+const statsBtn = document.getElementById("stats-btn");
+const statsModal = document.getElementById("stats-modal");
+const closeStats = document.getElementById("close-stats");
+
+statsBtn.addEventListener("click", () => {
+    updateStatsDisplay();
+    statsModal.style.display = "flex";
+    statsBtn.blur();
+});
+
+closeStats.addEventListener("click", () => {
+    statsModal.style.display = "none";
+});
+
+window.addEventListener("click", (e) => {
+    if (e.target === statsModal) {
+        statsModal.style.display = "none";
     }
 });

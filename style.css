@@ -270,7 +270,7 @@ h1 {
 
 }
 
-/* Top right help button */
+
 #help-btn {
     position: absolute;
     top: 20px;
@@ -296,9 +296,9 @@ h1 {
     border-color: white;
 }
 
-/* Modal Popup Background Overlay */
+
 .modal {
-    display: none; /* Hidden by default */
+    display: none;
     position: fixed;
     z-index: 100;
     left: 0;
@@ -310,7 +310,7 @@ h1 {
     justify-content: center;
 }
 
-/* Modal Box */
+
 .modal-content {
     background-color: #121213;
     border: 1px solid #3a3a3c;
@@ -358,6 +358,54 @@ h1 {
 .close:hover {
     color: white;
 }
+
+#stats-btn {
+    position: absolute;
+    top: 20px;
+    right: 75px;
+    background: transparent;
+    border: 2px solid #565758;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: border-color 0.2s;
+    opacity: 0;
+    animation: appear 0.5s ease 2.5s forwards;
+}
+
+#stats-btn img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    transition: filter 0.2s ease;
+}
+
+#stats-btn:hover {
+    border-color: white;
+}
+
+
+#stats-btn:hover img {
+    filter: brightness(0) invert(1);
+}
+
+.dist-bar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 8px;
+    box-sizing: border-box;
+    overflow: visible;
+    white-space: nowrap;
+    transition: width 0.5s ease-in-out;
+}
+
 
 
 @media screen and (max-width: 600px) {
@@ -423,6 +471,21 @@ h1 {
             animation: appear 0.5s ease 2s forwards;
         }
 
+    }
+
+    #help-btn {
+        top: 10px;
+        right: 10px;
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+    #stats-btn {
+        top: 10px;
+        right: 55px;
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
     }
 
 
