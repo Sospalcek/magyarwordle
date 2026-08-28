@@ -277,7 +277,7 @@ h1 {
     right: 20px;
     background: transparent;
     border: 2px solid #565758;
-    color: white;
+    color: #555657;
     font-size: 1.2rem;
     font-weight: bold;
     width: 40px;
@@ -294,6 +294,8 @@ h1 {
 
 #help-btn:hover {
     border-color: white;
+    transition: color 0.1s;
+    color: white;
 }
 
 
