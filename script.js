@@ -266,7 +266,7 @@ function checkGuess() {
             setTimeout(() => {
                 updateStatsDisplay();
                 statsModal.style.display = "flex";
-            }, 3000);
+            }, 2000);
 
         }, COLS * 200);
 
@@ -285,12 +285,6 @@ function checkGuess() {
 
         setTimeout(() => {
             showMessage(`Kifogytál próbálkozásokból! A szó: <span style="color: white; font-weight: bold;">${targetWord.toUpperCase()}</span> volt!`);
-
-            // Pop up the stats modal 2 seconds AFTER the loss message appears
-            setTimeout(() => {
-                updateStatsDisplay();
-                statsModal.style.display = "flex";
-            }, 30008);
 
         }, COLS * 200);
 
