@@ -215,7 +215,7 @@ h1 {
 .credits {
     position: fixed;
     bottom: 20px;
-    left: 20px;
+    left: 60px;
     color: #818384;
     font-size: 0.85rem;
     font-family: Arial, sans-serif;
@@ -226,6 +226,17 @@ h1 {
     animation: credit 0.5s ease forwards;
     animation-delay: 2s;
 
+}
+
+.profpic{
+    position: fixed;
+    bottom: 20px;
+    left: 15px;
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    opacity: 0;
+    animation: credit 0.5s ease 2s forwards;
 }
 @keyframes logo {
     0% {
