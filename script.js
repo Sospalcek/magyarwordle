@@ -10,7 +10,7 @@ let gameOver = false;
 let isRestarting = false;
 
 let targetWord = targetWords[Math.floor(Math.random() * targetWords.length)];
-console.log("target word:", targetWord);
+//console.log("target word:", targetWord);
 
 const boardState = Array(ROWS).fill().map(() => Array(COLS).fill(""));
 
