@@ -266,14 +266,15 @@ h1 {
 }
 
 .fast_message{
+
     position: fixed;
     bottom: 20px;
     right: 20px;
     color: #818384;
     font-size: 0.85rem;
     font-family: Arial, sans-serif;
-    line-height: 1.4;
-    text-align: left;
+    line-height: 0.5;
+    text-align: center;
     user-select: none;
     opacity: 0;
     animation: credit 0.5s ease forwards;
