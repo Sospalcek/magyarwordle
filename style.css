@@ -7,6 +7,12 @@
     align-items: center;
     height: 100vh;
     margin: 0;
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+
+.modal-content, .key, .tile, #restart-btn, #help-btn, #stats-btn, #github-btn, #theme-btn {
+    transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
 }
 
 #game-container {
@@ -137,7 +143,7 @@ h1 {
     justify-content: center;
     align-items: center;
     text-transform: uppercase;
-    transition: background-color 0.5s;
+    transition: background-color 0.5s, color 0.5s ease;
 }
 
 .wide-key{
@@ -527,6 +533,164 @@ h1 {
         height: 35px;
         font-size: 0.9rem;
     }
+
+#theme-btn {
+    position: absolute;
+    top: 11px;
+    right: 145px;
+    background: transparent;
+    border: 2px solid #565758;
+    color: #565758;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: border-color 0.2s, color 0.2s;
+    opacity: 0;
+    animation: appear 0.5s ease 2.9s forwards;
+}
+
+#theme-btn:hover {
+    border-color: white;
+    color: white;
+}
+
+
+
+body.light-mode {
+    background-color: #ffffff;
+    color: #121213;
+}
+
+body.light-mode .tile {
+    border-color: #d3d6da;
+    background-color: #ffffff;
+    color: #121213;
+}
+
+body.light-mode .tile.active-tile {
+    background-color: #f3f3f3;
+    border: 2px solid #878a8c;
+}
+
+body.light-mode .key {
+    background-color: #d3d6da;
+    color: #121213;
+}
+
+body.light-mode .key:hover {
+    background-color: #86898b;
+}
+
+body.light-mode .key.absent {
+    background-color: #787c7e !important;
+    color: white;
+}
+
+body.light-mode .modal-content {
+    background-color: #ffffff;
+    border-color: #d3d6da;
+    color: #121213;
+}
+
+body.light-mode #restart-btn{
+    background-color: #777b7d;
+}
+
+body.light-mode #restart-btn:hover {
+    background-color: #50c844;
+}
+
+body.light-mode #help-btn,
+body.light-mode #stats-btn,
+body.light-mode #github-btn,
+body.light-mode #theme-btn {
+    border-color: #878a8c;
+    color: #878a8c;
+}
+
+body.light-mode #help-btn:hover,
+body.light-mode #stats-btn:hover,
+body.light-mode #github-btn:hover,
+body.light-mode #theme-btn:hover {
+    border-color: #121213;
+    color: #121213;
+}
+
+
+body.light-mode #stats-btn img {
+
+}
+
+body.light-mode #stats-btn:hover img {
+    filter: brightness(0);
+}
+
+body.light-mode .tile.correct,
+body.light-mode .tile.present,
+body.light-mode .tile.absent {
+    color: white !important;
+}
+
+
+body.light-mode .key.correct,
+body.light-mode .key.present,
+body.light-mode .key.absent {
+    color: white !important;
+}
+
+body.light-mode .credits,
+body.light-mode .version,
+body.light-mode .fast_message{
+    color: #121213;
+}
+
+.theme-tooltip {
+    position: absolute;
+    top: 50px;
+    right: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-family: "Comic Sans MS", "Chalkboard SE", cursive, sans-serif;
+    font-size: 0.85rem;
+    color: #ffffff;
+    z-index: 200;
+    pointer-events: none;
+    opacity: 0;
+    animation: appear 0.5s ease 3.1s forwards, tooltipBounce 1s ease-in-out infinite alternate;
+}
+
+.tooltip-text {
+    position: fixed;
+    top: 30px;
+    right: -50px;
+    background: none;
+    padding: 0;
+    white-space: nowrap;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+body.light-mode .tooltip-text {
+    text-shadow: none;
+}
+
+.doodle-arrow {
+    width: 45px;
+    height: 35px;
+    margin-top: -2px;
+    margin-right: 10px;
+}
+
+@keyframes tooltipBounce {
+    from { transform: translateY(0); }
+    to { transform: translateY(-4px); }
+}
+
 
 
 
