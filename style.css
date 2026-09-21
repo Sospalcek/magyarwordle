@@ -291,15 +291,15 @@ h1 {
 
 #help-btn {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 10px;
+    right: 10px;
     background: transparent;
     border: 2px solid #565758;
     color: #555657;
     font-size: 1.2rem;
     font-weight: bold;
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
     cursor: pointer;
     display: flex;
@@ -381,13 +381,13 @@ h1 {
 
 #stats-btn {
     position: absolute;
-    top: 20px;
-    right: 75px;
+    top: 10px;
+    right: 55px;
     background: transparent;
     border: 2px solid #565758;
     color: white;
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
     cursor: pointer;
     display: flex;
@@ -488,36 +488,36 @@ h1 {
         font-size: 0.75rem;
     }
 
-        #help-btn {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            width: 35px;
-            height: 35px;
-            font-size: 1rem;
-        }
-
-        .modal-content {
-            width: 95%;
-            padding: 16px;
-        }
-
-        .credits {
-            font-size: 0.5rem;
-        }
-
-        .fast_message {
-            position: fixed;
-            top: 10px;
-            right: 130px;
-            font-size: 0.5rem;
-            animation: appear 0.5s ease 2s forwards;
-        }
-        #github-btn {
-            right: 355px;
-        }
-
+    #help-btn {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
     }
+
+    .modal-content {
+        width: 95%;
+        padding: 16px;
+    }
+
+    .credits {
+        font-size: 0.5rem;
+    }
+
+    .fast_message {
+        position: fixed;
+        top: 10px;
+        right: 107px;
+        font-size: 0.5rem;
+        animation: appear 0.5s ease 2s forwards;
+    }
+
+    #github-btn {
+        right: 355px;
+    }
+
 
     #help-btn {
         top: 10px;
@@ -526,6 +526,7 @@ h1 {
         height: 35px;
         font-size: 1rem;
     }
+
     #stats-btn {
         top: 10px;
         right: 55px;
@@ -534,9 +535,28 @@ h1 {
         font-size: 0.9rem;
     }
 
+    #github-btn {
+        top: 10px;
+        left: 55px;
+    }
+
+    #theme-btn {
+        top: 10px;
+        left: 10px;
+    }
+
+    .tooltip-text {
+        opacity: 0;
+    }
+
+    .doodle-arrow {
+        opacity: 0;
+    }
+}
+
 #theme-btn {
     position: absolute;
-    top: 11px;
+    top: 10px;
     right: 145px;
     background: transparent;
     border: 2px solid #565758;
