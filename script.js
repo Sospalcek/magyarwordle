@@ -284,7 +284,7 @@ function checkGuess() {
         recordLoss();
 
         setTimeout(() => {
-            showMessage(`Kifogytál próbálkozásokból! A szó: <span style="color: white; font-weight: bold;">${targetWord.toUpperCase()}</span> volt!`);
+            showMessage(`Kifogytál próbálkozásokból! A szó: <span class="reveal-word">${targetWord.toUpperCase()}</span> volt!`);
 
         }, COLS * 200);
 
