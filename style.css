@@ -801,6 +801,22 @@ body.light-mode .mode-label.active {
     color: #121213;
 }
 
+body.light-mode .modal-content{
+    background-color: #121213;
+    border: 1px solid #50c844;
+    color: white;
+    padding: 24px;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 8px;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    font-family: inherit;
+    transform: scale(0.8);
+    opacity: 0;
+    animation: modalPopUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
 
 @keyframes fadeOut {
     0% { opacity: 1; transform: translateY(0); }
