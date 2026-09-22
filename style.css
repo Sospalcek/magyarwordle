@@ -11,7 +11,7 @@
 }
 
 
-.modal-content, .key, .tile, #restart-btn, #help-btn, #stats-btn, #github-btn, #theme-btn {
+.modal-content, .key, .tile, #restart-btn, #help-btn, #stats-btn, #github-btn, #theme-btn, #mode-switch-container, .highlight-word {
     transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
 }
 
@@ -712,7 +712,115 @@ body.light-mode .tooltip-text {
 }
 
 
+.mode-switch-container {
+    position: relative;
+    width: 150px;
+    height: 38px;
+    background-color: #272729;
+    border: 2px solid #565758;
+    border-radius: 19px;
+    margin: 0 auto 20px auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 4px;
+    cursor: pointer;
+    user-select: none;
+    box-sizing: border-box;
+    opacity: 0;
+    animation: fadeInSlide 1s ease forwards;
+    animation-delay: 1.5s;
+    transition: border-color 0.3s ease;
+}
+
+.mode-switch-container:hover {
+    border-color: white;
+}
+
+.mode-switch-thumb {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 70px;
+    height: 28px;
+    background-color: #51ca45;
+    border-radius: 14px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mode-switch-container.practice .mode-switch-thumb {
+    transform: translateX(70px);
+}
+
+.mode-label {
+    position: relative;
+    z-index: 2;
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: #818384;
+    transition: color 0.3s ease;
+    width: 50%;
+    text-align: center;
+}
+
+.mode-label.active {
+    color: white;
+}
 
 
+@keyframes titleSwitch {
+    0% {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.title-animate {
+    animation: titleSwitch 0.3s ease forwards;
+}
 
 
+body.light-mode .mode-switch-container {
+    background-color: #e2e8f0;
+    border-color: #878a8c;
+}
+
+body.light-mode .mode-switch-container:hover {
+    border-color: #121213;
+}
+
+body.light-mode .mode-label {
+    color: #64748b;
+}
+
+body.light-mode .mode-label.active {
+    color: #121213;
+}
+
+
+@keyframes fadeOut {
+    0% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-10px); }
+}
+
+#restart-btn.fade-out, #message.fade-out {
+    animation: fadeOut 0.3s ease forwards !important;
+}
+
+#restart-btn {
+
+    transition: background-color 0.2s, transform 0.1s, opacity 0.3s ease;
+}
+
+.highlight-word {
+    color: white;
+    font-weight: bold;
+}
+
+body.light-mode .highlight-word {
+    color: #121213 !important;
+}

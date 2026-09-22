@@ -15,6 +15,7 @@
 
 <img src="cat-prof.png" alt="en" class="profpic">
 
+
 <div id="help-modal" class="modal">
     <div class="modal-content">
         <span id="close-modal" class="close">&times;</span>
@@ -120,7 +121,7 @@
 
 <div class="credits">
     Készítette: Sospalcek<br>
-    <span class="version">v1.4</span>
+    <span class="version">v1.5</span>
 </div>
 
 <div class="fast_message">
@@ -129,11 +130,16 @@
 </div>
 
 <div id="game-container">
-
-
     <img src="logo.png" alt="Magyar Wordle Logo" class="site-logo">
 
-    <h1>MAGYAR WORDLE</h1>
+    <h1 id="game-title">NAPI SZÓ</h1>
+
+
+    <div id="mode-switch-container" class="mode-switch-container" title="Mód váltása">
+        <div id="mode-switch-thumb" class="mode-switch-thumb"></div>
+        <span class="mode-label left active">Napi</span>
+        <span class="mode-label right">Gyakorlás</span>
+    </div>
 
     <div id="board"></div>
 
@@ -145,5 +151,7 @@
 </div>
 
 <script type="module" src="script.js"></script>
+
+
 </body>
 </html>
