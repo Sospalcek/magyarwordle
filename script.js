@@ -3,22 +3,18 @@
 const ROWS = 6;
 const COLS = 5;
 
-
 let currentMode = 'daily';
-
 
 let dailyBoardState = Array(ROWS).fill().map(() => Array(COLS).fill(""));
 let dailyCurrentRow = 0;
 let dailyCurrentCol = 0;
 let dailyGameOver = false;
 
-
 let practiceTargetWord = "";
 let practiceBoardState = Array(ROWS).fill().map(() => Array(COLS).fill(""));
 let practiceCurrentRow = 0;
 let practiceCurrentCol = 0;
 let practiceGameOver = false;
-
 
 let targetWord = "";
 let boardState = [];
@@ -27,11 +23,9 @@ let currentCol = 0;
 let gameOver = false;
 let isRestarting = false;
 
-
 function getTodayDateString() {
     return new Date().toISOString().slice(0, 10);
 }
-
 
 function getDailyWord() {
     const today = getTodayDateString();
@@ -91,7 +85,6 @@ keyboardRows.forEach(row => {
 
     keyboardContainer.appendChild(rowDiv);
 });
-
 
 function loadDailyProgress() {
     targetWord = getDailyWord();
@@ -195,18 +188,25 @@ function colorizeRowFromSaved(rowIdx, guess) {
     }
 }
 
-
 loadDailyProgress();
 restoreBoardAndKeyboard();
 
-
 const modeSwitchContainer = document.getElementById("mode-switch-container");
 const modeLabels = document.querySelectorAll(".mode-label");
+
+// Itt tároljuk az aktív időzítőt, hogy spamelésnél le tudjuk állítani
+let modeSwitchTimeout = null;
 
 if (modeSwitchContainer) {
     modeSwitchContainer.addEventListener("click", () => {
         modeSwitchContainer.blur();
 
+        // Ha spamelik, töröljük az előző váltás időzítőjét, hogy ne csússzanak össze
+        if (modeSwitchTimeout) {
+            clearTimeout(modeSwitchTimeout);
+        }
+
+        showMessage(""); // Azonnal eltüntetjük az esetleges beragadt üzenetet
 
         for (let r = 0; r < ROWS; r++) {
             for (let c = 0; c < COLS; c++) {
@@ -217,7 +217,7 @@ if (modeSwitchContainer) {
         restartBtn.classList.add("fade-out");
         messageEl.classList.add("fade-out");
 
-        setTimeout(() => {
+        modeSwitchTimeout = setTimeout(() => {
             syncPointersToActiveMode();
 
             if (currentMode === 'daily') {
@@ -227,7 +227,7 @@ if (modeSwitchContainer) {
                 modeLabels[1].classList.add("active");
 
                 animateTitleChange("GYAKORLÁS");
-                initPracticeMode(); // Mindig friss gyakorlójátékot indít átváltáskor
+                initPracticeMode();
             } else {
                 currentMode = 'daily';
                 modeSwitchContainer.classList.remove("practice");
@@ -291,7 +291,6 @@ function initPracticeMode() {
 }
 
 function restoreBoardAndKeyboard() {
-    // Reset key visuals first
     Object.values(keyElements).forEach(keyEl => {
         if (keyEl.textContent === "Enter" || keyEl.textContent === "⌫") {
             keyEl.className = "key wide-key";
@@ -303,58 +302,42 @@ function restoreBoardAndKeyboard() {
     if (gameOver && currentMode === 'daily') {
         restartBtn.style.visibility = "hidden";
         restartBtn.style.pointerEvents = "none";
-
-        for (let r = 0; r < ROWS; r++) {
-            for (let c = 0; c < COLS; c++) {
-                const tile = document.getElementById(`tile-${r}-${c}`);
-                tile.textContent = "";
-                tile.className = "tile";
-            }
-        }
-
-        const totalEntranceTime = (ROWS * COLS - 1) * 40 + 500;
-        setTimeout(() => {
-            for (let r = 0; r < ROWS; r++) {
-                for (let c = 0; c < COLS; c++) {
-                    const tile = document.getElementById(`tile-${r}-${c}`);
-                    tile.textContent = boardState[r][c];
-                }
-            }
-
-            for (let r = 0; r < currentRow; r++) {
-                const guess = boardState[r].join("").toLowerCase();
-                colorizeRowFromSaved(r, guess);
-            }
-
-            showMessage(`A mai szó már teljesítve lett: <span class="highlight-word">${targetWord.toUpperCase()}</span>`);
-        }, totalEntranceTime);
-
     } else {
         restartBtn.style.visibility = "visible";
         restartBtn.style.pointerEvents = "auto";
+    }
 
+    for (let r = 0; r < ROWS; r++) {
+        for (let c = 0; c < COLS; c++) {
+            const tile = document.getElementById(`tile-${r}-${c}`);
+            tile.textContent = "";
+            tile.className = "tile";
+        }
+    }
+
+    const totalEntranceTime = (ROWS * COLS - 1) * 40 + 500;
+    setTimeout(() => {
         for (let r = 0; r < ROWS; r++) {
             for (let c = 0; c < COLS; c++) {
                 const tile = document.getElementById(`tile-${r}-${c}`);
                 tile.textContent = boardState[r][c];
-                tile.className = "tile";
             }
         }
 
-
-        const totalEntranceTime = (ROWS * COLS - 1) * 40 + 400;
-        setTimeout(() => {
-            for (let r = 0; r < currentRow; r++) {
-                const guess = boardState[r].join("").toLowerCase();
-                colorizeRowFromSaved(r, guess);
-            }
-        }, totalEntranceTime);
-
-        if (!gameOver) {
-            showMessage("");
+        for (let r = 0; r < currentRow; r++) {
+            const guess = boardState[r].join("").toLowerCase();
+            colorizeRowFromSaved(r, guess);
         }
-        updateTileDisplay();
-    }
+
+        if (gameOver && currentMode === 'daily') {
+            showMessage(`A mai szó már teljesítve lett: <span class="highlight-word">${targetWord.toUpperCase()}</span>`);
+        } else {
+            if (!gameOver) {
+                showMessage("");
+            }
+            updateTileDisplay();
+        }
+    }, totalEntranceTime);
 }
 
 function handleKeyPress(key) {
@@ -678,7 +661,6 @@ window.addEventListener("click", (e) => {
         statsModal.style.display = "none";
     }
 });
-
 
 const themeBtn = document.getElementById("theme-btn");
 const sunSvg = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
