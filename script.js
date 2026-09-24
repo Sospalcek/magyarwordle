@@ -194,19 +194,19 @@ restoreBoardAndKeyboard();
 const modeSwitchContainer = document.getElementById("mode-switch-container");
 const modeLabels = document.querySelectorAll(".mode-label");
 
-// Itt tároljuk az aktív időzítőt, hogy spamelésnél le tudjuk állítani
+
 let modeSwitchTimeout = null;
 
 if (modeSwitchContainer) {
     modeSwitchContainer.addEventListener("click", () => {
         modeSwitchContainer.blur();
 
-        // Ha spamelik, töröljük az előző váltás időzítőjét, hogy ne csússzanak össze
+
         if (modeSwitchTimeout) {
             clearTimeout(modeSwitchTimeout);
         }
 
-        showMessage(""); // Azonnal eltüntetjük az esetleges beragadt üzenetet
+        showMessage("");
 
         for (let r = 0; r < ROWS; r++) {
             for (let c = 0; c < COLS; c++) {
@@ -592,7 +592,6 @@ window.addEventListener("click", (e) => {
     }
 });
 
-// Statistics
 let stats = JSON.parse(localStorage.getItem("magyar_wordle_daily_stats")) || {
     gamesPlayed: 0,
     wins: 0,
