@@ -29,10 +29,10 @@ function getTodayDateString() {
 
 function getDailyWord() {
     const today = getTodayDateString();
-    let hash = 0;
+    let hash = 2166136261;
     for (let i = 0; i < today.length; i++) {
-        hash = (hash << 5) - hash + today.charCodeAt(i);
-        hash |= 0;
+        hash ^= today.charCodeAt(i);
+        hash = Math.imul(hash, 16777619);
     }
     const index = Math.abs(hash) % rawDictionary.length;
     return rawDictionary[index];
@@ -193,14 +193,11 @@ restoreBoardAndKeyboard();
 
 const modeSwitchContainer = document.getElementById("mode-switch-container");
 const modeLabels = document.querySelectorAll(".mode-label");
-
-
 let modeSwitchTimeout = null;
 
 if (modeSwitchContainer) {
     modeSwitchContainer.addEventListener("click", () => {
         modeSwitchContainer.blur();
-
 
         if (modeSwitchTimeout) {
             clearTimeout(modeSwitchTimeout);
@@ -677,7 +674,7 @@ themeBtn.addEventListener("click", () => {
     themeBtn.innerHTML = isLight ? moonSvg : sunSvg;
     localStorage.setItem("theme", isLight ? "light" : "dark");
 
-    localStorage.setItem('themeTipClicked', 'true');
+    localStorage.setItem('themeTipGridClicked', 'true');
     const tooltip = document.getElementById('theme-tooltip');
     if (tooltip) {
         tooltip.style.opacity = '0';
