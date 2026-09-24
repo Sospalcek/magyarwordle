@@ -268,7 +268,6 @@ h1 {
 .tile.active-tile {
     background-color: #232325;
     border: 2px solid #61616a;
-    //box-shadow: 0 0 8px rgb(89 89 92); /
 }
 
 .fast_message{
@@ -426,30 +425,30 @@ h1 {
     transition: width 0.5s ease-in-out;
 }
 
-    #github-btn {
-        position: absolute;
-        top: 10px;
-        right: 100px;
-        background: transparent;
-        border: 2px solid #565758;
-        color: #565758;
-        width: 31px;
-        height: 31px;
-        border-radius: 50%;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0;
-        transition: border-color 0.2s, color 0.2s;
-        opacity: 0;
-        animation: appear 0.5s ease 2.6s forwards;
-    }
+#github-btn {
+    position: absolute;
+    top: 10px;
+    right: 100px;
+    background: transparent;
+    border: 2px solid #565758;
+    color: #565758;
+    width: 31px;
+    height: 31px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: border-color 0.2s, color 0.2s;
+    opacity: 0;
+    animation: appear 0.5s ease 2.6s forwards;
+}
 
-    #github-btn:hover {
-        border-color: white;
-        color: white;
-    }
+#github-btn:hover {
+    border-color: white;
+    color: white;
+}
 
 @media screen and (max-width: 600px) {
     html, body {
@@ -745,11 +744,12 @@ body.light-mode .tooltip-text {
     height: 28px;
     background-color: #51ca45;
     border-radius: 14px;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease;
 }
 
 .mode-switch-container.practice .mode-switch-thumb {
     transform: translateX(70px);
+    background-color: #d5a220;
 }
 
 .mode-label {
@@ -828,7 +828,6 @@ body.light-mode .modal-content{
 }
 
 #restart-btn {
-
     transition: background-color 0.2s, transform 0.1s, opacity 0.3s ease;
 }
 
