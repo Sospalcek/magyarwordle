@@ -109,12 +109,20 @@ function loadDailyProgress() {
     currentCol = dailyCurrentCol;
     gameOver = dailyGameOver;
 
-    if (gameOver) {
+    updateRestartButtonVisibility();
+}
+
+function updateRestartButtonVisibility() {
+    if (currentMode === 'daily') {
         restartBtn.style.visibility = "hidden";
+        restartBtn.style.opacity = "0";
         restartBtn.style.pointerEvents = "none";
+        restartBtn.style.display = "block";
     } else {
         restartBtn.style.visibility = "visible";
+        restartBtn.style.opacity = "1";
         restartBtn.style.pointerEvents = "auto";
+        restartBtn.style.display = "block";
     }
 }
 
@@ -194,19 +202,17 @@ restoreBoardAndKeyboard();
 const modeSwitchContainer = document.getElementById("mode-switch-container");
 const modeLabels = document.querySelectorAll(".mode-label");
 
-// Itt tároljuk az aktív időzítőt, hogy spamelésnél le tudjuk állítani
 let modeSwitchTimeout = null;
 
 if (modeSwitchContainer) {
     modeSwitchContainer.addEventListener("click", () => {
         modeSwitchContainer.blur();
 
-        // Ha spamelik, töröljük az előző váltás időzítőjét, hogy ne csússzanak össze
         if (modeSwitchTimeout) {
             clearTimeout(modeSwitchTimeout);
         }
 
-        showMessage(""); // Azonnal eltüntetjük az esetleges beragadt üzenetet
+        showMessage("");
 
         for (let r = 0; r < ROWS; r++) {
             for (let c = 0; c < COLS; c++) {
@@ -239,6 +245,7 @@ if (modeSwitchContainer) {
                 restoreBoardAndKeyboard();
             }
 
+            updateRestartButtonVisibility();
             restartBtn.classList.remove("fade-out");
             messageEl.classList.remove("fade-out");
             triggerButtonPopUp();
@@ -283,9 +290,7 @@ function initPracticeMode() {
     currentCol = practiceCurrentCol;
     gameOver = practiceGameOver;
 
-    restartBtn.style.visibility = "visible";
-    restartBtn.style.pointerEvents = "auto";
-
+    updateRestartButtonVisibility();
     restoreBoardAndKeyboard();
     showMessage("");
 }
@@ -299,13 +304,7 @@ function restoreBoardAndKeyboard() {
         }
     });
 
-    if (gameOver && currentMode === 'daily') {
-        restartBtn.style.visibility = "hidden";
-        restartBtn.style.pointerEvents = "none";
-    } else {
-        restartBtn.style.visibility = "visible";
-        restartBtn.style.pointerEvents = "auto";
-    }
+    updateRestartButtonVisibility();
 
     for (let r = 0; r < ROWS; r++) {
         for (let c = 0; c < COLS; c++) {
@@ -395,7 +394,7 @@ document.addEventListener("keydown", (e) => {
 });
 
 restartBtn.addEventListener("click", () => {
-    if (currentMode === 'daily' && gameOver) return;
+    if (currentMode === 'daily') return;
     if (isRestarting) return;
     isRestarting = true;
     restartBtn.blur();
@@ -410,17 +409,6 @@ restartBtn.addEventListener("click", () => {
     setTimeout(() => {
         if (currentMode === 'practice') {
             initPracticeMode();
-        } else {
-            dailyBoardState = Array(ROWS).fill().map(() => Array(COLS).fill(""));
-            dailyCurrentRow = 0;
-            dailyCurrentCol = 0;
-            dailyGameOver = false;
-            boardState = dailyBoardState;
-            currentRow = dailyCurrentRow;
-            currentCol = dailyCurrentCol;
-            gameOver = dailyGameOver;
-            saveDailyProgress();
-            restoreBoardAndKeyboard();
         }
 
         for (let r = 0; r < ROWS; r++) {
@@ -545,8 +533,7 @@ function checkGuess() {
             }
 
             if (currentMode === 'daily') {
-                restartBtn.style.visibility = "hidden";
-                restartBtn.style.pointerEvents = "none";
+                updateRestartButtonVisibility();
                 setTimeout(() => {
                     updateStatsDisplay();
                     statsModal.style.display = "flex";
@@ -565,8 +552,7 @@ function checkGuess() {
         setTimeout(() => {
             showMessage(`Kifogytál próbálkozásokból! A szó: <span class="highlight-word">${targetWord.toUpperCase()}</span> volt!`);
             if (currentMode === 'daily') {
-                restartBtn.style.visibility = "hidden";
-                restartBtn.style.pointerEvents = "none";
+                updateRestartButtonVisibility();
             }
         }, COLS * 200);
     }
