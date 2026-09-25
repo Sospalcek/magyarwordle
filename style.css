@@ -104,8 +104,8 @@ h1 {
     animation: fade 0.5s ease forwards !important;
 }
 .tile.absent {
-    background-color: #787c7e !important;
-    border-color: #787c7e !important;
+    background-color: #3c3e3f !important;
+    border-color: #3c3e3f !important;
     color: white;
     animation: fade 0.5s ease forwards !important;
 }
