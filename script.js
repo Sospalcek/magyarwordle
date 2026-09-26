@@ -29,10 +29,10 @@ function getTodayDateString() {
 
 function getDailyWord() {
     const today = getTodayDateString();
-    let hash = 0;
+    let hash = 2166136261;
     for (let i = 0; i < today.length; i++) {
-        hash = (hash << 5) - hash + today.charCodeAt(i);
-        hash |= 0;
+        hash ^= today.charCodeAt(i);
+        hash = Math.imul(hash, 16777619);
     }
     const index = Math.abs(hash) % rawDictionary.length;
     return rawDictionary[index];
